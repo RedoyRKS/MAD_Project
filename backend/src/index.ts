@@ -16,6 +16,7 @@ const db = mysql.createConnection({
   database: 'myappdb'
 });
 
+// Connect to MySQL
 db.connect((err) => {
   if (err) {
     console.error('Database connection failed:', err);
@@ -23,6 +24,26 @@ db.connect((err) => {
   }
   console.log('Connected to MySQL database');
 });
+
+// // Booking Endpoint
+// app.post('/api/bookings', (req, res) => {
+//   const { fieldName, date, time, bkashNumber } = req.body;
+
+//   if (!fieldName || !date || !time || !bkashNumber) {
+//     return res.status(400).send('All fields are required');
+//   }
+
+//   const query = `INSERT INTO bookings (fieldName, date, time, bkashNumber) VALUES (?, ?, ?, ?)`;
+
+//   db.query(query, [fieldName, date, time, bkashNumber], (err, results) => {
+//     if (err) {
+//       console.error('Error inserting booking:', err);
+//       return res.status(500).send('Error storing booking information');
+//     }
+
+//     res.status(201).send('Booking successfully stored');
+//   });
+// });
 
 // Sample signup endpoint
 app.post('/signup', (req, res) => {
