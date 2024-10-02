@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import cors from 'cors';
 import mysql, { RowDataPacket } from 'mysql2';
 
@@ -25,25 +25,25 @@ db.connect((err) => {
   console.log('Connected to MySQL database');
 });
 
-// // Booking Endpoint
-// app.post('/api/bookings', (req, res) => {
-//   const { fieldName, date, time, bkashNumber } = req.body;
+// Booking Endpoint
+app.post('/api/bookings', (req: Request, res: Response) => {
+  const { fieldName, date, time, bkashNumber } = req.body
 
-//   if (!fieldName || !date || !time || !bkashNumber) {
-//     return res.status(400).send('All fields are required');
-//   }
+  if (!fieldName || !date || !time || !bkashNumber) {
+    res.status(400).send('All fields are required');
+  }
 
-//   const query = `INSERT INTO bookings (fieldName, date, time, bkashNumber) VALUES (?, ?, ?, ?)`;
+  const query = `INSERT INTO bookings (fieldName, date, time, bkashNumber) VALUES (?, ?, ?, ?)`;
 
-//   db.query(query, [fieldName, date, time, bkashNumber], (err, results) => {
-//     if (err) {
-//       console.error('Error inserting booking:', err);
-//       return res.status(500).send('Error storing booking information');
-//     }
+  db.query(query, [fieldName, date, time, bkashNumber], (err, results) => {
+    if (err) {
+      console.error('Error inserting booking:', err);
+      res.status(500).send('Error storing booking information');
+    }
 
-//     res.status(201).send('Booking successfully stored');
-//   });
-// });
+    res.status(201).send('Booking successfully stored');
+  });
+});
 
 // Sample signup endpoint
 app.post('/signup', (req, res) => {
