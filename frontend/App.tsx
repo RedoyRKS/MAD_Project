@@ -8,6 +8,8 @@ import FootballFieldsScreen from './src/screens/FootballFieldsScreen';
 import BadmintonCourtsScreen from './src/screens/BadmintonCourtsScreen';
 import BookingScreen from './src/screens/BookingScreen';
 import PaymentOptionsScreen from './src/screens/PaymentOptionsScreen';
+import AdminLoginScreen from './src/screens/AdminLoginScreen';
+import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
 
 
 
@@ -24,6 +26,8 @@ export default function App() {
         <Stack.Screen name="BadmintonCourts" component={BadmintonCourtsScreen} options={{ title: 'Badminton Courts' }} />
         <Stack.Screen name="Booking" component={BookingScreen} options={{ title: 'Book Field/Court' }} />
         <Stack.Screen name="PaymentOptions" component={PaymentOptionsScreen} />
+        <Stack.Screen name="AdminLogin" component={AdminLoginScreen} />
+        <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

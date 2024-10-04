@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
 export default function LoginScreen({ navigation }) {
@@ -7,7 +7,8 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    axios.post('http://localhost:3000/login', { username, password })
+    axios
+      .post('http://localhost:3000/login', { username, password })
       .then(response => {
         if (response.data.success) {
           alert('Login successful');
@@ -19,6 +20,10 @@ export default function LoginScreen({ navigation }) {
       .catch(error => {
         alert('Login failed. Please try again.');
       });
+  };
+
+  const handleAdminLogin = () => {
+    navigation.navigate('AdminLogin');
   };
 
   return (
@@ -41,6 +46,10 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.linkText} onPress={() => navigation.navigate('Signup')}>
         Don't have an account? Sign up here.
       </Text>
+
+      <TouchableOpacity onPress={handleAdminLogin} style={styles.adminButton}>
+        <Text style={styles.adminButtonText}>Admin Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -66,5 +75,16 @@ const styles = StyleSheet.create({
     color: 'blue',
     marginTop: 16,
     textAlign: 'center',
+  },
+  adminButton: {
+    marginTop: 20,
+    backgroundColor: '#28a745',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  adminButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });

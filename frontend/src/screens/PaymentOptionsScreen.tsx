@@ -14,14 +14,14 @@ export default function PaymentOptionsScreen({ navigation }) {
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('bKash')}
       >
-        <Text style={styles.paymentText}>bKash</Text>
+        <Text style={styles.paymentText}>bKash-017661060**</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('Nagad')}
       >
-        <Text style={styles.paymentText}>Nagad</Text>
+        <Text style={styles.paymentText}>Nagad-017661060**</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -35,7 +35,7 @@ export default function PaymentOptionsScreen({ navigation }) {
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('Rocket')}
       >
-        <Text style={styles.paymentText}>Rocket</Text>
+        <Text style={styles.paymentText}>Rocket-017661060**</Text>
       </TouchableOpacity>
     </View>
   );
