@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios'; 
 
-
 export default function BookingScreen({ route, navigation }) {
   const { fieldName } = route.params;
 
@@ -18,7 +17,7 @@ export default function BookingScreen({ route, navigation }) {
 
     try {
       // Send booking information to the backend
-      const response = await axios.post('http://localhost:3000/bookings', {
+      const response = await axios.post('http://localhost:3000/api/bookings', {
         fieldName,
         date,
         time,

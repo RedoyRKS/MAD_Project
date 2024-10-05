@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
 export default function SignupScreen({ navigation }) {
@@ -18,41 +18,82 @@ export default function SignupScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Signup</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <Button title="Sign Up" onPress={handleSignup} />
-    </View>
+    <ImageBackground 
+      source={require('../Assets/bg.jpg')} // Replace with your image path
+      style={styles.background}
+      resizeMode="cover" // Ensures the image covers the entire background without repeating
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Signup</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="#fff"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#fff"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity onPress={handleSignup} style={styles.signupButton}>
+          <Text style={styles.signupButtonText}>Sign Up</Text>
+        </TouchableOpacity>
+        <Text style={styles.linkText} onPress={() => navigation.navigate('Login')}>
+          Already have an account? Log in here.
+        </Text>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    padding: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a semi-transparent overlay for better contrast
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 28,
+    color: '#fff',
+    marginBottom: 30,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginVertical: 8,
+    borderColor: '#fff',
+    padding: 10,
+    marginVertical: 10,
+    color: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)', // Semi-transparent white for the input background
+  },
+  signupButton: {
+    marginTop: 20,
+    backgroundColor: '#28a745',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  signupButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  linkText: {
+    color: '#add8e6',
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 16,
   },
 });

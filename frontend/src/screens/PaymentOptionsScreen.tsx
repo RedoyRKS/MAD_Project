@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 
 export default function PaymentOptionsScreen({ navigation }) {
-  const handlePaymentSelection = (method: string) => {
+  const handlePaymentSelection = (method) => {
     Alert.alert('Payment Selected', `You have selected ${method} for payment.`);
   };
 
@@ -14,28 +14,44 @@ export default function PaymentOptionsScreen({ navigation }) {
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('bKash')}
       >
-        <Text style={styles.paymentText}>bKash-017661060**</Text>
+        <Image
+          source={require('../Assets/bkash.png')} // Ensure the path is correct
+          style={styles.paymentImage}
+        />
+        <Text>01766106096</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('Nagad')}
       >
-        <Text style={styles.paymentText}>Nagad-017661060**</Text>
+        <Image
+          source={require('../Assets/nagad.png')} // Ensure the path is correct
+          style={styles.paymentImage}
+        />
+        <Text>01766106096</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('Credit/Debit Card')}
       >
-        <Text style={styles.paymentText}>Credit/Debit Card</Text>
+        <Image
+          source={require('../Assets/master_card.png')} // Ensure the path is correct
+          style={styles.paymentImage}
+        />
+        <Text>01766106096</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.paymentOption}
         onPress={() => handlePaymentSelection('Rocket')}
       >
-        <Text style={styles.paymentText}>Rocket-017661060**</Text>
+        <Image
+          source={require('../Assets/rocket.png')} // Ensure the path is correct
+          style={styles.paymentImage}
+        />
+        <Text>01766106096</Text>
       </TouchableOpacity>
     </View>
   );
@@ -61,8 +77,9 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: 'center',
   },
-  paymentText: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  paymentImage: {
+    width: 200,
+    height: 150,
+    resizeMode: 'contain',
   },
 });
