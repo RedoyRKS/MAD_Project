@@ -133,7 +133,85 @@ app.delete('/deleteField/:id', (req: Request, res: Response): void => {
     res.status(200).json({ success: true, message: 'Field deleted successfully' });
   });
 });
+// GET route to retrieve all events
+app.get('/getEvents', (req: Request, res: Response): void => {
+  const query = 'SELECT * FROM eventdetails';
 
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Database query error:', err);
+      return res.status(500).json({ success: false, message: 'Error fetching events', error: err.message });
+    }
+
+    console.log('Results:', results);  // Check if the results are coming back from the database
+
+    return res.status(200).json({ success: true, events: results });
+  });
+});
+
+// POST route to add an event
+app.post('/addEvents', (req: Request, res: Response): void => {
+  try {
+    const { eventTitle, eventOrganizers, eventLocation, date, time } = req.body;
+
+    // Check if all required fields are provided
+    if (!eventTitle || !eventOrganizers || !eventLocation || !date || !time) {
+     res.status(400).json({ success: false, message: 'All fields are required except the image.' });
+     return;
+    }
+
+    // Prepare SQL query to insert the event data
+    const query = `
+      INSERT INTO eventdetails (eventTitle, eventOrganizers, eventLocation, date, time)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
+    // Execute the query
+    db.query(query, [eventTitle, eventOrganizers, eventLocation, date, time], (err, result) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Error saving event', error: err.message });
+      }
+
+      // Successfully added the event
+      return res.status(201).json({ success: true, message: 'Event added successfully' });
+    });
+  } catch (error) {
+    // Handle unexpected errors
+    console.error('Error adding event:', error);
+    res.status(500).json({ success: false, message: 'Internal server error', error: (error as any).message });
+
+    return;
+  }
+});
+//Delete an event by ID
+app.delete('/deleteEvent/:id', (req: Request, res: Response): void => {
+  const { id } = req.params;
+
+  // Validate the id parameter
+  if (!id) {
+    res.status(400).json({ success: false, message: 'Event ID is required' });
+    return;
+  }
+
+  const query = 'DELETE FROM eventdetails WHERE id = ?';
+
+  db.query(query, [id], (err, result: mysql.OkPacket) => {
+    if (err) {
+      // Send a 500 status if there's an error during the query execution
+      res.status(500).json({ success: false, message: 'Error deleting event', error: err.message });
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      // Handle the case where no event was found to delete
+      res.status(404).json({ success: false, message: 'Event not found' });
+      return;
+    }
+
+    // Successful deletion response
+    res.status(200).json({ success: true, message: 'Event deleted successfully' });
+  });
+});
 
 
 //Serve uploaded files statically
