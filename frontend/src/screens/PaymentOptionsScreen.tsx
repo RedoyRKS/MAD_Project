@@ -37,7 +37,7 @@ export default function PaymentOptionsScreen({ navigation }) {
         onPress={() => handlePaymentSelection('Credit/Debit Card')}
       >
         <Image
-          source={require('../Assets/master_card.png')} // Ensure the path is correct
+          source={require('../Assets/master_card.png')} 
           style={styles.paymentImage}
         />
         <Text>01766106096</Text>
@@ -48,7 +48,7 @@ export default function PaymentOptionsScreen({ navigation }) {
         onPress={() => handlePaymentSelection('Rocket')}
       >
         <Image
-          source={require('../Assets/rocket.png')} // Ensure the path is correct
+          source={require('../Assets/rocket.png')} 
           style={styles.paymentImage}
         />
         <Text>01766106096</Text>
